@@ -17,6 +17,7 @@ lancer:
   name: Cu Chulainn
   email: fsn@example.com
   password_digest: <%= User.digest('password') %>
+  # This should be false, but test fails when it is
   activated: true #false
 
 lana:

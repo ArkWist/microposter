@@ -15,6 +15,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     assert_select 'div.pagination'
     first_page_of_users = User.paginate(page: 1)
     first_page_of_users.each do |user|
+      # Fails with an unactivated user
       assert_select 'a[href=?]', user_path(user), text: user.name
       unless user == @admin
         assert_select 'a[href=?]', user_path(user), text: 'delete'
@@ -36,7 +37,8 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     get users_path
     first_page_of_users = User.paginate(page: 1)
     first_page_of_users.each do |user|
-      assert user.activated? == true
+      # Fails with an unactivated user
+      assert user.activated?
     end
   end
 
