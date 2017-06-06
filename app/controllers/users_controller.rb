@@ -12,8 +12,9 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    # TODO: Determine of the following line is correct
-    redirect_to root_url and return unless @user.activated?
+    # TODO: Determine if the following line is correct
+    # redirect_to root_url and return unless @user.activated?
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
   
   def new
